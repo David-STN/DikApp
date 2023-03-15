@@ -1,26 +1,31 @@
 import 'package:flutter/material.dart';
-import 'Pages/calendar_page.dart';
-import 'Pages/chat_page.dart';
-import 'Pages/map_page.dart';
-import 'Pages/profile_page.dart';
-import 'Pages/home_page.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:dic_app/Pages/calendar_page.dart';
+import 'package:dic_app/Pages/calendar_page.dart';
+import 'package:dic_app/Pages/chat_page.dart';
+import 'package:dic_app/Pages/home_page.dart';
+import 'package:dic_app/Pages/profile_page.dart';
+import 'package:dic_app/Pages/map_page.dart';
+import 'package:dic_app/Pages/pippo_page.dart';
+import 'package:dic_app/widget_tree.dart';
 
-void main() {
+Future<void> main() async {
+  //WidgetsFlutterBinding.ensureInitialized();
+  //await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: MyBottomNavigationBar(),
+    return MaterialApp(
+      theme: ThemeData(
+        primarySwatch: Colors.orange,
+      ),
+      //home: const WidgetTree(),
+      home: const MyBottomNavigationBar(),
     );
   }
 }
@@ -37,7 +42,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   final List<Widget> _children = [
     const CalPage(),
     const MapPage(),
-    const HomePage(),
+    const HomePages(),
     const ChatPage(),
     const ProfilePage()
   ];
@@ -49,7 +54,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(
-            label: 'Map',
+            label: 'Calendario',
             icon: Icon(
               Icons.calendar_today,
               color: Color.fromARGB(255, 89, 89, 71),
@@ -67,7 +72,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
             backgroundColor: Color.fromARGB(255, 204, 204, 178),
           ),
           BottomNavigationBarItem(
-            label: 'Map',
+            label: 'Home',
             icon: Icon(
               Icons.layers_outlined,
               color: Color.fromARGB(255, 89, 89, 71),
@@ -76,7 +81,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
             backgroundColor: Color.fromARGB(255, 204, 204, 178),
           ),
           BottomNavigationBarItem(
-            label: 'Map',
+            label: 'Chat',
             icon: Icon(
               Icons.chat_bubble_outline_rounded,
               color: Color.fromARGB(255, 89, 89, 71),
@@ -85,7 +90,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
             backgroundColor: Color.fromARGB(255, 204, 204, 178),
           ),
           BottomNavigationBarItem(
-            label: 'Map',
+            label: 'Profile',
             icon: Icon(
               Icons.person_pin,
               color: Color.fromARGB(255, 89, 89, 71),
